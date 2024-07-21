@@ -14,7 +14,7 @@ import matplotlib.pyplot as plt
 wandb.init(project='eeg_cls')
 
 class EEGTransformerClassifier(nn.Module):
-    def __init__(self, input_dim, num_classes, seq_len, num_layers=6, d_model=128, nhead=8, dim_feedforward=512, dropout=0.1, mlp_hidden_dim=512, mlp_num_layers=3):
+    def __init__(self, input_dim, num_classes, seq_len, num_layers=6, d_model=256, nhead=8, dim_feedforward=1024, dropout=0.2, mlp_hidden_dim=1024, mlp_num_layers=3):
         super(EEGTransformerClassifier, self).__init__()
         self.embedding = nn.Linear(input_dim, d_model)
         encoder_layer = nn.TransformerEncoderLayer(d_model=d_model, nhead=nhead, dim_feedforward=dim_feedforward, dropout=dropout)
@@ -129,7 +129,7 @@ num_classes = 3
 seq_len = 240  
 batch_size = 64
 num_epochs = 100
-learning_rate = 0.001
+learning_rate = 3e-5
 
 model = EEGTransformerClassifier(input_dim=input_dim, num_classes=num_classes, seq_len=seq_len).cuda()
 criterion = nn.CrossEntropyLoss()
