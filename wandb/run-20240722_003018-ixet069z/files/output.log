@@ -1,0 +1,43 @@
+/home/pengy/.conda/envs/torch/lib/python3.10/site-packages/torch/nn/modules/transformer.py:306: UserWarning: enable_nested_tensor is True, but self.use_nested_tensor is False because encoder_layer.self_attn.batch_first was not True(use batch_first for better inference performance)
+  warnings.warn(f"enable_nested_tensor is True, but self.use_nested_tensor is False because {why_not_sparsity_fast_path}")
+Epoch [1/100], Train Loss: 1.7759, Train Accuracy: 72.04%, Test Loss: 1.3818, Test Accuracy: 78.89%
+Best model saved with accuracy: 78.89%
+Epoch [2/100], Train Loss: 0.6690, Train Accuracy: 78.86%, Test Loss: 0.5642, Test Accuracy: 77.27%
+Epoch [3/100], Train Loss: 0.5175, Train Accuracy: 79.20%, Test Loss: 0.4270, Test Accuracy: 82.03%
+Best model saved with accuracy: 82.03%
+Epoch [4/100], Train Loss: 0.4806, Train Accuracy: 80.21%, Test Loss: 0.6084, Test Accuracy: 76.01%
+Epoch [5/100], Train Loss: 0.4913, Train Accuracy: 80.12%, Test Loss: 0.4258, Test Accuracy: 79.78%
+Epoch [6/100], Train Loss: 0.4290, Train Accuracy: 80.95%, Test Loss: 0.5685, Test Accuracy: 77.99%
+Epoch [7/100], Train Loss: 0.4674, Train Accuracy: 80.00%, Test Loss: 0.3951, Test Accuracy: 82.75%
+Best model saved with accuracy: 82.75%
+Epoch [8/100], Train Loss: 0.4036, Train Accuracy: 82.34%, Test Loss: 0.4635, Test Accuracy: 79.69%
+Epoch [9/100], Train Loss: 0.4104, Train Accuracy: 81.51%, Test Loss: 0.3967, Test Accuracy: 82.84%
+Best model saved with accuracy: 82.84%
+Traceback (most recent call last):
+  File "/mnt/ssd/pengy/eeg_cls/train.py", line 112, in <module>
+    ax.set_xlabel('Predicted')
+  File "/mnt/ssd/pengy/eeg_cls/train.py", line 37, in train_transformer_model
+    running_loss = 0.0
+  File "/home/pengy/.conda/envs/torch/lib/python3.10/site-packages/torch/utils/data/dataloader.py", line 631, in __next__
+    data = self._next_data()
+  File "/home/pengy/.conda/envs/torch/lib/python3.10/site-packages/torch/utils/data/dataloader.py", line 675, in _next_data
+    data = self._dataset_fetcher.fetch(index)  # may raise StopIteration
+  File "/home/pengy/.conda/envs/torch/lib/python3.10/site-packages/torch/utils/data/_utils/fetch.py", line 49, in fetch
+    data = self.dataset.__getitems__(possibly_batched_index)
+  File "/home/pengy/.conda/envs/torch/lib/python3.10/site-packages/torch/utils/data/dataset.py", line 419, in __getitems__
+    return [self.dataset[self.indices[idx]] for idx in indices]
+  File "/home/pengy/.conda/envs/torch/lib/python3.10/site-packages/torch/utils/data/dataset.py", line 419, in <listcomp>
+    return [self.dataset[self.indices[idx]] for idx in indices]
+  File "/mnt/ssd/pengy/eeg_cls/data/eegset.py", line 43, in __getitem__
+    while idx < self.__len__():
+  File "/mnt/ssd/pengy/eeg_cls/data/eegset.py", line 40, in __len__
+    return len(self.data['Timestamp'].unique())
+  File "/home/pengy/.conda/envs/torch/lib/python3.10/site-packages/pandas/core/series.py", line 2242, in unique
+    return super().unique()
+  File "/home/pengy/.conda/envs/torch/lib/python3.10/site-packages/pandas/core/base.py", line 1001, in unique
+    result = unique1d(values)
+  File "/home/pengy/.conda/envs/torch/lib/python3.10/site-packages/pandas/core/algorithms.py", line 409, in unique
+    return unique_with_mask(values)
+  File "/home/pengy/.conda/envs/torch/lib/python3.10/site-packages/pandas/core/algorithms.py", line 425, in unique_with_mask
+    uniques = table.unique(values)
+KeyboardInterrupt

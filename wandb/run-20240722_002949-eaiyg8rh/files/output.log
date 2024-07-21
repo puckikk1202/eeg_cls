@@ -1,0 +1,8 @@
+/home/pengy/.conda/envs/torch/lib/python3.10/site-packages/torch/nn/modules/transformer.py:306: UserWarning: enable_nested_tensor is True, but self.use_nested_tensor is False because encoder_layer.self_attn.batch_first was not True(use batch_first for better inference performance)
+  warnings.warn(f"enable_nested_tensor is True, but self.use_nested_tensor is False because {why_not_sparsity_fast_path}")
+Traceback (most recent call last):
+  File "/mnt/ssd/pengy/eeg_cls/train.py", line 111, in <module>
+    train_loader, test_loader = create_dataloader_from_folders(eeg_folder_path, emotion_folder_path, batch_size=batch_size, seq_len=seq_len)
+  File "/mnt/ssd/pengy/eeg_cls/data/eegset.py", line 87, in create_dataloader_from_folders
+    train_dataset, test_dataset = random_split(dataset, [train_size, test_size])
+NameError: name 'random_split' is not defined

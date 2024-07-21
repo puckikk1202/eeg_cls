@@ -1,0 +1,20 @@
+/home/pengy/.conda/envs/torch/lib/python3.10/site-packages/torch/nn/modules/transformer.py:306: UserWarning: enable_nested_tensor is True, but self.use_nested_tensor is False because encoder_layer.self_attn.batch_first was not True(use batch_first for better inference performance)
+  warnings.warn(f"enable_nested_tensor is True, but self.use_nested_tensor is False because {why_not_sparsity_fast_path}")
+Traceback (most recent call last):
+  File "/mnt/ssd/pengy/eeg_cls/train.py", line 142, in <module>
+    train_transformer_model(train_loader, test_loader, model, criterion, optimizer, num_epochs=num_epochs)
+  File "/mnt/ssd/pengy/eeg_cls/train.py", line 42, in train_transformer_model
+    for eeg_data, emotion_labels in train_loader:
+  File "/home/pengy/.conda/envs/torch/lib/python3.10/site-packages/torch/utils/data/dataloader.py", line 631, in __next__
+    data = self._next_data()
+  File "/home/pengy/.conda/envs/torch/lib/python3.10/site-packages/torch/utils/data/dataloader.py", line 675, in _next_data
+    data = self._dataset_fetcher.fetch(index)  # may raise StopIteration
+  File "/home/pengy/.conda/envs/torch/lib/python3.10/site-packages/torch/utils/data/_utils/fetch.py", line 54, in fetch
+    return self.collate_fn(data)
+  File "/home/pengy/.conda/envs/torch/lib/python3.10/site-packages/torch/utils/data/_utils/collate.py", line 316, in default_collate
+    return collate(batch, collate_fn_map=default_collate_fn_map)
+  File "/home/pengy/.conda/envs/torch/lib/python3.10/site-packages/torch/utils/data/_utils/collate.py", line 168, in collate
+    if not all(len(elem) == elem_size for elem in it):
+  File "/home/pengy/.conda/envs/torch/lib/python3.10/site-packages/torch/utils/data/_utils/collate.py", line 168, in <genexpr>
+    if not all(len(elem) == elem_size for elem in it):
+TypeError: object of type 'NoneType' has no len()

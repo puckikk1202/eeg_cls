@@ -1,0 +1,14 @@
+/home/pengy/.conda/envs/torch/lib/python3.10/site-packages/torch/nn/modules/transformer.py:306: UserWarning: enable_nested_tensor is True, but self.use_nested_tensor is False because encoder_layer.self_attn.batch_first was not True(use batch_first for better inference performance)
+  warnings.warn(f"enable_nested_tensor is True, but self.use_nested_tensor is False because {why_not_sparsity_fast_path}")
+Traceback (most recent call last):
+  File "/mnt/ssd/pengy/eeg_cls/train.py", line 142, in <module>
+    train_transformer_model(train_loader, test_loader, model, criterion, optimizer, num_epochs=num_epochs)
+  File "/mnt/ssd/pengy/eeg_cls/train.py", line 67, in train_transformer_model
+    cm_fig = plot_confusion_matrix(cm, classes=['Neutral', 'Smile', 'Sad', 'N/A'])
+  File "/mnt/ssd/pengy/eeg_cls/train.py", line 121, in plot_confusion_matrix
+    ax.set_xticklabels(classes)
+  File "/home/pengy/.conda/envs/torch/lib/python3.10/site-packages/matplotlib/axes/_base.py", line 74, in wrapper
+    return get_method(self)(*args, **kwargs)
+  File "/home/pengy/.conda/envs/torch/lib/python3.10/site-packages/matplotlib/axis.py", line 2060, in set_ticklabels
+    raise ValueError(
+ValueError: The number of FixedLocator locations (3), usually from a call to set_ticks, does not match the number of labels (4).

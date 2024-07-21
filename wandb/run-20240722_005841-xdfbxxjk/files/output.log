@@ -1,0 +1,22 @@
+/home/pengy/.conda/envs/torch/lib/python3.10/site-packages/torch/nn/modules/transformer.py:306: UserWarning: enable_nested_tensor is True, but self.use_nested_tensor is False because encoder_layer.self_attn.batch_first was not True(use batch_first for better inference performance)
+  warnings.warn(f"enable_nested_tensor is True, but self.use_nested_tensor is False because {why_not_sparsity_fast_path}")
+Traceback (most recent call last):
+  File "/mnt/ssd/pengy/eeg_cls/train.py", line 136, in <module>
+    train_transformer_model(train_loader, test_loader, model, criterion, optimizer, num_epochs=num_epochs)
+  File "/mnt/ssd/pengy/eeg_cls/train.py", line 62, in train_transformer_model
+    test_loss, test_acc, test_preds, test_labels = evaluate_model(test_loader, model, criterion)
+  File "/mnt/ssd/pengy/eeg_cls/train.py", line 95, in evaluate_model
+    outputs = model(eeg_data)
+  File "/home/pengy/.conda/envs/torch/lib/python3.10/site-packages/torch/nn/modules/module.py", line 1532, in _wrapped_call_impl
+    return self._call_impl(*args, **kwargs)
+  File "/home/pengy/.conda/envs/torch/lib/python3.10/site-packages/torch/nn/modules/module.py", line 1541, in _call_impl
+    return forward_call(*args, **kwargs)
+  File "/mnt/ssd/pengy/eeg_cls/train.py", line 26, in forward
+    x = self.embedding(x)  # (batch_size, seq_len, d_model)
+  File "/home/pengy/.conda/envs/torch/lib/python3.10/site-packages/torch/nn/modules/module.py", line 1532, in _wrapped_call_impl
+    return self._call_impl(*args, **kwargs)
+  File "/home/pengy/.conda/envs/torch/lib/python3.10/site-packages/torch/nn/modules/module.py", line 1541, in _call_impl
+    return forward_call(*args, **kwargs)
+  File "/home/pengy/.conda/envs/torch/lib/python3.10/site-packages/torch/nn/modules/linear.py", line 116, in forward
+    return F.linear(input, self.weight, self.bias)
+RuntimeError: Expected all tensors to be on the same device, but found at least two devices, cpu and cuda:0! (when checking argument for argument mat2 in method wrapper_CUDA_mm)
