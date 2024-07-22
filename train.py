@@ -61,10 +61,13 @@ def train_transformer_model(train_loader, test_loader, model, criterion, optimiz
 
         # 验证模型
         model.eval()
-        test_loss, test_acc, test_preds, test_labels = evaluate_model(test_loader, model, criterion)
+        test_loss, test_acc, test_preds, test_labels, train_preds, train_labels = evaluate_model(test_loader, train_loader, model, criterion)
 
         cm = confusion_matrix(test_labels, test_preds)
-        cm_fig = plot_confusion_matrix(cm, classes=['Neutral', 'Smile', 'Sad'])
+        test_cm_fig = plot_confusion_matrix(cm, classes=['Neutral', 'Smile', 'Sad'])
+
+        cm = confusion_matrix(train_labels, train_preds)
+        train_cm_fig = plot_confusion_matrix(cm, classes=['Neutral', 'Smile', 'Sad'])
         
         # 打印和记录训练和测试的损失和准确率
         print(f'Epoch [{epoch + 1}/{num_epochs}], Train Loss: {train_loss:.4f}, Train Accuracy: {train_acc:.2f}%, Test Loss: {test_loss:.4f}, Test Accuracy: {test_acc:.2f}%')
@@ -74,7 +77,8 @@ def train_transformer_model(train_loader, test_loader, model, criterion, optimiz
             'train_accuracy': train_acc,
             'test_loss': test_loss,
             'test_accuracy': test_acc,
-            'confusion_matrix': wandb.Image(cm_fig)
+            'train_confusion_matrix': wandb.Image(train_cm_fig),
+            'test_confusion_matrix': wandb.Image(test_cm_fig),
         })
 
         if test_acc > best_acc:
@@ -86,14 +90,14 @@ def train_transformer_model(train_loader, test_loader, model, criterion, optimiz
     
     torch.save(model.state_dict(), './model_outputs/egg_cls.pth')
 
-def evaluate_model(dataloader, model, criterion):
+def evaluate_model(test_dataloader, train_dataloader, model, criterion):
     running_loss = 0.0
     correct = 0
     total = 0
     all_preds = []
     all_labels = []
     with torch.no_grad():
-        for eeg_data, emotion_labels in dataloader:
+        for eeg_data, emotion_labels in test_dataloader:
 
             eeg_data = eeg_data.cuda()
             emotion_labels = emotion_labels.cuda()
@@ -107,10 +111,28 @@ def evaluate_model(dataloader, model, criterion):
             correct += (predicted == labels).sum().item()
             all_preds.extend(predicted.cpu().numpy())
             all_labels.extend(labels.cpu().numpy())
+
+
+        train_all_preds = []
+        train_all_labels = []
+        for eeg_data, emotion_labels in train_dataloader:
+
+            eeg_data = eeg_data.cuda()
+            emotion_labels = emotion_labels.cuda()
+
+            outputs = model(eeg_data)
+            # loss = criterion(outputs, torch.argmax(emotion_labels, dim=1))
+            # running_loss += loss.item()
+            _, predicted = torch.max(outputs.data, 1)
+            _, labels = torch.max(emotion_labels, 1)
+            # total += labels.size(0)
+            # correct += (predicted == labels).sum().item()
+            train_all_preds.extend(predicted.cpu().numpy())
+            train_all_labels.extend(labels.cpu().numpy())
     
-    loss = running_loss / len(dataloader)
+    loss = running_loss / len(test_dataloader)
     acc = 100 * correct / total
-    return loss, acc, all_preds, all_labels
+    return loss, acc, all_preds, all_labels, train_all_preds, train_all_labels
 
 def plot_confusion_matrix(cm, classes):
     fig, ax = plt.subplots()

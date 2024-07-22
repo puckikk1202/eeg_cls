@@ -103,12 +103,12 @@ def custom_collate_fn(batch):
     return eeg_data, emotion_labels
 
 
-# Usage example
-eeg_folder_path = './dataset/eegset'  # Please replace with the actual folder containing EEG data
-emotion_folder_path = './dataset/anno'  # Please replace with the actual folder containing emotion label data
-train_loader, test_loader = create_dataloader_from_folders(eeg_folder_path, emotion_folder_path)
+# # Usage example
+# eeg_folder_path = './dataset/eegset'  # Please replace with the actual folder containing EEG data
+# emotion_folder_path = './dataset/anno'  # Please replace with the actual folder containing emotion label data
+# train_loader, test_loader = create_dataloader_from_folders(eeg_folder_path, emotion_folder_path)
 
-# Test dataloader
-for batch in train_loader:
-    eeg_data, emotion_labels = batch
-    # print(eeg_data.shape, emotion_labels.shape)
+# # Test dataloader
+# for batch in train_loader:
+#     eeg_data, emotion_labels = batch
+#     # print(eeg_data.shape, emotion_labels.shape)

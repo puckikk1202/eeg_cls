@@ -1,0 +1,45 @@
+/home/pengy/.conda/envs/torch/lib/python3.10/site-packages/torch/nn/modules/transformer.py:306: UserWarning: enable_nested_tensor is True, but self.use_nested_tensor is False because encoder_layer.self_attn.batch_first was not True(use batch_first for better inference performance)
+  warnings.warn(f"enable_nested_tensor is True, but self.use_nested_tensor is False because {why_not_sparsity_fast_path}")
+Epoch [1/100], Train Loss: 1.1004, Train Accuracy: 49.10%, Test Loss: 0.9327, Test Accuracy: 55.35%
+Best model saved with accuracy: 55.35%
+Epoch [2/100], Train Loss: 0.9293, Train Accuracy: 54.40%, Test Loss: 0.9502, Test Accuracy: 54.00%
+Epoch [3/100], Train Loss: 0.9274, Train Accuracy: 53.84%, Test Loss: 0.9228, Test Accuracy: 53.91%
+Epoch [4/100], Train Loss: 0.9161, Train Accuracy: 54.29%, Test Loss: 0.9314, Test Accuracy: 53.55%
+Epoch [5/100], Train Loss: 0.9171, Train Accuracy: 54.62%, Test Loss: 0.9247, Test Accuracy: 54.09%
+Epoch [6/100], Train Loss: 0.9090, Train Accuracy: 54.44%, Test Loss: 0.9412, Test Accuracy: 53.28%
+Epoch [7/100], Train Loss: 0.9033, Train Accuracy: 56.42%, Test Loss: 0.9199, Test Accuracy: 57.41%
+Best model saved with accuracy: 57.41%
+Epoch [8/100], Train Loss: 0.8969, Train Accuracy: 55.86%, Test Loss: 0.9210, Test Accuracy: 57.95%
+Best model saved with accuracy: 57.95%
+Epoch [9/100], Train Loss: 0.8905, Train Accuracy: 56.96%, Test Loss: 0.9240, Test Accuracy: 53.91%
+Epoch [10/100], Train Loss: 0.8876, Train Accuracy: 57.02%, Test Loss: 0.9236, Test Accuracy: 55.44%
+Traceback (most recent call last):
+  File "/mnt/ssd/pengy/eeg_cls/eeg_cls/train.py", line 164, in <module>
+    train_transformer_model(train_loader, test_loader, model, criterion, optimizer, num_epochs=num_epochs)
+  File "/mnt/ssd/pengy/eeg_cls/eeg_cls/train.py", line 64, in train_transformer_model
+    test_loss, test_acc, test_preds, test_labels, train_preds, train_labels = evaluate_model(test_loader, train_loader, model, criterion)
+  File "/mnt/ssd/pengy/eeg_cls/eeg_cls/train.py", line 118, in evaluate_model
+    for eeg_data, emotion_labels in train_dataloader:
+  File "/home/pengy/.conda/envs/torch/lib/python3.10/site-packages/torch/utils/data/dataloader.py", line 631, in __next__
+    data = self._next_data()
+  File "/home/pengy/.conda/envs/torch/lib/python3.10/site-packages/torch/utils/data/dataloader.py", line 675, in _next_data
+    data = self._dataset_fetcher.fetch(index)  # may raise StopIteration
+  File "/home/pengy/.conda/envs/torch/lib/python3.10/site-packages/torch/utils/data/_utils/fetch.py", line 49, in fetch
+    data = self.dataset.__getitems__(possibly_batched_index)
+  File "/home/pengy/.conda/envs/torch/lib/python3.10/site-packages/torch/utils/data/dataset.py", line 419, in __getitems__
+    return [self.dataset[self.indices[idx]] for idx in indices]
+  File "/home/pengy/.conda/envs/torch/lib/python3.10/site-packages/torch/utils/data/dataset.py", line 419, in <listcomp>
+    return [self.dataset[self.indices[idx]] for idx in indices]
+  File "/mnt/ssd/pengy/eeg_cls/eeg_cls/data/eegset.py", line 44, in __getitem__
+    while idx < self.__len__():
+  File "/mnt/ssd/pengy/eeg_cls/eeg_cls/data/eegset.py", line 41, in __len__
+    return len(self.data['Timestamp'].unique())
+  File "/home/pengy/.conda/envs/torch/lib/python3.10/site-packages/pandas/core/series.py", line 2242, in unique
+    return super().unique()
+  File "/home/pengy/.conda/envs/torch/lib/python3.10/site-packages/pandas/core/base.py", line 1001, in unique
+    result = unique1d(values)
+  File "/home/pengy/.conda/envs/torch/lib/python3.10/site-packages/pandas/core/algorithms.py", line 409, in unique
+    return unique_with_mask(values)
+  File "/home/pengy/.conda/envs/torch/lib/python3.10/site-packages/pandas/core/algorithms.py", line 425, in unique_with_mask
+    uniques = table.unique(values)
+KeyboardInterrupt
